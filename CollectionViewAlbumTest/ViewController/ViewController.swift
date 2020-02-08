@@ -23,8 +23,9 @@ class ViewController: UIViewController {
             if viewCounter >= 50 {
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
-                    self.collectionView.reloadData()
+                    AlbumController.albums?.shuffle()
                     self.activityView.stopAnimating()
+                     self.reloadData()
                     self.viewCounter = 0
                 }
             }
@@ -123,5 +124,24 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
         
         destination?.album = AlbumController.albums?[indexPath[0].row]
     }
+    
+    func reloadData() {
+        UIView.transition(with: collectionView, duration: 0.5, options: .transitionFlipFromBottom, animations: {
+            //Do the data reload here
+            self.collectionView.reloadData()
+        }, completion: nil)
+    }
 }
 
+// MARK: - Shake Functions
+extension ViewController {
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            refreshControlPulled()
+        }
+    }
+}
