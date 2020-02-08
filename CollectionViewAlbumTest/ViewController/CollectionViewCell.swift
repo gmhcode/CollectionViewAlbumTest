@@ -23,10 +23,13 @@ class CollectionViewCell: UICollectionViewCell {
     
     func setUp() {
         guard let album = album else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+        
         albumIDLabel.text = "Album ID: " + String(album.albumId)
         idLabel.text = "ID: " + String(album.id)
         titleLabel.text = "Title: " + album.title
+        
+        
         self.layer.borderWidth = 2
-        self.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.layer.borderColor = AlbumController.urlCache.object(forKey: album.url.absoluteString as NSString)?.averageColor?.cgColor
     }
 }

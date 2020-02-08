@@ -9,7 +9,7 @@
 import UIKit
 
 class NewViewController: UIViewController {
-
+    
     var album : Album?
     @IBOutlet weak var dismissButton: UIButton!
     
@@ -22,9 +22,11 @@ class NewViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         
         if let album = album {
-           
+            
             let cachedImage = AlbumController.urlCache.object(forKey: album.url.absoluteString as NSString)
+            
             dismissButton.backgroundColor = cachedImage?.averageColor?.inverseColor()
+            
             view.backgroundColor = cachedImage?.averageColor
         }
         dismissButton.layer.cornerRadius = dismissButton.frame.width / 2
@@ -34,13 +36,13 @@ class NewViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
